@@ -1,143 +1,116 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "theme": "mint",
   "name": "CryptoTally",
+  "theme": "quill",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#111827",
     "light": "#4B5563",
     "dark": "#111827"
   },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "index",
-              "quickstart",
-              "features"
-            ]
-          },
-          {
-            "group": "Core Concepts",
-            "pages": [
-              "concepts/wallets",
-              "concepts/transactions",
-              "concepts/tagging",
-              "concepts/exports"
-            ]
-          },
-          {
-            "group": "Features",
-            "pages": [
-              "features/wallet-tracking",
-              "features/transaction-sync",
-              "features/tagging-notes",
-              "features/dashboard-analytics",
-              "features/reports-exports"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "How-to Guides",
-            "pages": [
-              "guides/getting-started",
-              "guides/adding-wallets",
-              "guides/tagging-transactions",
-              "guides/generating-reports",
-              "guides/tax-preparation"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "api-reference/introduction",
-              "api-reference/authentication"
-            ]
-          },
-          {
-            "group": "Endpoints",
-            "pages": [
-              "api-reference/endpoint/get-wallets",
-              "api-reference/endpoint/get-transactions",
-              "api-reference/endpoint/create-tag",
-              "api-reference/endpoint/export-data"
-            ]
-          }
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "GitHub",
-          "href": "https://github.com/cryptotally",
-          "icon": "github"
-        },
-        {
-          "anchor": "Discord Community",
-          "href": "https://discord.gg/cryptotally",
-          "icon": "discord"
-        },
-        {
-          "anchor": "Status",
-          "href": "https://status.cryptotally.xyz",
-          "icon": "signal"
-        }
+  "topbarLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/cryptotally"
+    },
+    {
+      "name": "Discord",
+      "url": "https://discord.gg/cryptotally"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://app.cryptotally.xyz/waitlist"
+  },
+  "tabs": [
+    {
+      "name": "Guides",
+      "url": "guides"
+    },
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/cryptotally"
+    },
+    {
+      "name": "Discord Community",
+      "icon": "discord",
+      "url": "https://discord.gg/cryptotally"
+    },
+    {
+      "name": "Status",
+      "icon": "signal",
+      "url": "https://status.cryptotally.xyz"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "index",
+        "quickstart",
+        "features"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "concepts/wallets",
+        "concepts/transactions",
+        "concepts/tagging",
+        "concepts/exports"
+      ]
+    },
+    {
+      "group": "Features",
+      "pages": [
+        "features/wallet-tracking",
+        "features/transaction-sync",
+        "features/tagging-notes",
+        "features/dashboard-analytics",
+        "features/reports-exports"
+      ]
+    },
+    {
+      "group": "How-to Guides",
+      "pages": [
+        "guides/getting-started",
+        "guides/adding-wallets",
+        "guides/tagging-transactions",
+        "guides/generating-reports",
+        "guides/tax-preparation"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/authentication"
+      ]
+    },
+    {
+      "group": "Endpoints",
+      "pages": [
+        "api-reference/endpoint/get-wallets",
+        "api-reference/endpoint/get-transactions",
+        "api-reference/endpoint/create-tag",
+        "api-reference/endpoint/export-data"
       ]
     }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Discord",
-        "href": "https://discord.gg/cryptotally"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "https://app.cryptotally.xyz/waitlist"
-    }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/cryptotally",
-      "github": "https://github.com/cryptotally",
-      "linkedin": "https://linkedin.com/company/cryptotally"
-    }
-  },
-  "analytics": {
-    "posthog": {
-      "apiKey": "<YOUR_POSTHOG_API_KEY>"
-    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/cryptotally",
+    "github": "https://github.com/cryptotally",
+    "linkedin": "https://linkedin.com/company/cryptotally"
   }
 }
