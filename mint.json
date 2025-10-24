@@ -12,7 +12,12 @@
     "light": "#4B5563",
     "dark": "#111827"
   },
-  "topbarLinks": [],
+  "topbarLinks": [
+    {
+      "name": "Feedback",
+      "url": "https://app.cryptotally.xyz/feedback"
+    }
+  ],
   "topbarCtaButton": {
     "name": "Get Started",
     "url": "https://app.cryptotally.xyz/waitlist"
@@ -27,13 +32,7 @@
       "url": "api-reference"
     }
   ],
-  "anchors": [
-    {
-      "name": "Feedback",
-      "icon": "comment",
-      "url": "https://app.cryptotally.xyz/feedback"
-    }
-  ],
+  "anchors": [],
   "navigation": [
     {
       "group": "Get Started",
