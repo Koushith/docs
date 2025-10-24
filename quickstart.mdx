@@ -1,80 +1,198 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: 'Quickstart'
+description: 'Get started with CryptoTally in under 5 minutes'
+icon: 'rocket'
 ---
 
-## Get started in three steps
+## Setup your account
 
-Get your documentation site running locally and make your first customization.
+Get your crypto transactions organized in just a few steps.
 
-### Step 1: Set up your local environment
+<Steps>
+  <Step title="Create an Account">
+    Sign up with your email or Google account at [app.cryptotally.xyz](https://app.cryptotally.xyz)
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+    ```bash
+    # Or join the waitlist first
+    https://app.cryptotally.xyz/waitlist
+    ```
+  </Step>
 
-### Step 2: Deploy your changes
+  <Step title="Add Your First Wallet">
+    Navigate to the **Wallets** page and click "Add Wallet"
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    <Tip>
+      You only need the wallet address - no private keys or signatures required!
+    </Tip>
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+    - Paste your wallet address (0x...)
+    - Select the blockchain (Ethereum, Polygon, etc.)
+    - Add a label (e.g., "Treasury", "Personal")
+  </Step>
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+  <Step title="Sync Transactions">
+    CryptoTally automatically fetches all transactions for your wallet
 
-### Step 3: Go live
+    <Info>
+      Initial sync may take a few moments depending on transaction history
+    </Info>
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+    Features:
+    - Native token transfers (ETH, MATIC, BNB)
+    - ERC20 token transfers
+    - Fiat values at time of transaction
+    - DEX swaps and complex transactions
+  </Step>
 
-## Next steps
+  <Step title="Tag Your Transactions">
+    Click on any transaction to add tags and notes
 
-Now that you have your docs running, explore these key features:
+    Common tags:
+    - Customer Payment
+    - Vendor Expense
+    - Salary
+    - Grant
+    - Gas Fees
+  </Step>
+
+  <Step title="Export for Taxes">
+    Generate reports filtered by date range, wallet, or tag
+
+    ```bash
+    Dashboard → Reports → Export CSV
+    ```
+  </Step>
+</Steps>
+
+## Quick Actions
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card
+    title="Add Multiple Wallets"
+    icon="wallet"
+    href="/guides/adding-wallets"
+  >
+    Track multiple wallets across different chains
+  </Card>
+  <Card
+    title="Bulk Tag Transactions"
+    icon="tags"
+    href="/guides/tagging-transactions"
+  >
+    Tag multiple transactions at once
+  </Card>
+  <Card
+    title="Upload Attachments"
+    icon="file-upload"
+    href="/features/tagging-notes#attachments"
+  >
+    Add invoices and receipts to transactions
+  </Card>
+  <Card
+    title="Generate Tax Reports"
+    icon="file-invoice"
+    href="/guides/tax-preparation"
+  >
+    Export data ready for tax filing
+  </Card>
 </CardGroup>
 
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
+## Video Tutorial
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/your-video-id"
+  title="CryptoTally Quickstart"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+## Example Use Cases
+
+<AccordionGroup>
+  <Accordion title="Freelancer receiving crypto payments">
+    1. Add your Ethereum wallet where clients pay you
+    2. Tag each payment with client name or project
+    3. Upload invoices as attachments
+    4. Export filtered by date range for quarterly taxes
+  </Accordion>
+
+  <Accordion title="Startup managing treasury">
+    1. Add your DAO treasury wallet
+    2. Tag expenses (payroll, vendors, tools)
+    3. Track income (investments, grants, revenue)
+    4. Generate monthly reports for accounting
+  </Accordion>
+
+  <Accordion title="Individual crypto income">
+    1. Add all wallets you use for crypto income
+    2. Tag by income type (staking, airdrops, payments)
+    3. Track fiat value at time of receipt
+    4. Export for tax software (Koinly, CoinTracker, etc.)
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Learn Core Concepts"
+    icon="book"
+    href="/concepts/wallets"
+  >
+    Understand how CryptoTally works
+  </Card>
+  <Card
+    title="Explore Features"
+    icon="sparkles"
+    href="/features"
+  >
+    Discover all the features
+  </Card>
+  <Card
+    title="API Integration"
+    icon="code"
+    href="/api-reference"
+  >
+    Integrate with your tools
+  </Card>
+  <Card
+    title="Join Community"
+    icon="users"
+    href="https://discord.gg/cryptotally"
+  >
+    Get help and share feedback
+  </Card>
+</CardGroup>
+
+## Common Questions
+
+<AccordionGroup>
+  <Accordion title="Do I need to connect my wallet like MetaMask?">
+    No! CryptoTally is **read-only**. You just paste your wallet address - no wallet connection, no signing, no risk.
+  </Accordion>
+
+  <Accordion title="Which blockchains are supported?">
+    Currently: Ethereum, Polygon, Arbitrum, and BNB Chain. More chains coming soon!
+  </Accordion>
+
+  <Accordion title="How accurate are the fiat values?">
+    We use CoinGecko API to fetch historical prices at the exact time of each transaction.
+  </Accordion>
+
+  <Accordion title="Can I track someone else's wallet?">
+    Yes! Since it's read-only, you can track any public wallet address (great for monitoring DAO treasuries or public figures).
+  </Accordion>
+</AccordionGroup>
+
+## Need Help?
+
+<Card
+  title="Contact Support"
+  icon="headset"
+  href="https://app.cryptotally.xyz/feedback"
+>
+  Submit feedback or report issues directly in the app
+</Card>

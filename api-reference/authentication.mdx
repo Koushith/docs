@@ -1,0 +1,107 @@
+---
+title: 'Authentication'
+description: 'Learn how to authenticate with the CryptoTally API'
+icon: 'key'
+---
+
+## API Keys
+
+All API requests must include an API key in the Authorization header.
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Generating API Keys
+
+<Steps>
+  <Step title="Navigate to API Keys">
+    Go to [app.cryptotally.xyz/api-keys](https://app.cryptotally.xyz/api-keys)
+  </Step>
+  <Step title="Create New Key">
+    Click "Generate New API Key" and give it a name
+  </Step>
+  <Step title="Copy the Key">
+    <Warning>
+      The key is only shown once! Store it securely.
+    </Warning>
+    Copy and store your API key in a secure location
+  </Step>
+</Steps>
+
+## Using API Keys
+
+### cURL Example
+```bash
+curl https://api.cryptotally.xyz/v1/wallets \
+  -H "Authorization: Bearer ct_live_abc123xyz..."
+```
+
+### JavaScript Example
+```javascript
+const response = await fetch('https://api.cryptotally.xyz/v1/wallets', {
+  headers: {
+    'Authorization': 'Bearer ct_live_abc123xyz...'
+  }
+});
+```
+
+### Python Example
+```python
+import requests
+
+headers = {
+    'Authorization': 'Bearer ct_live_abc123xyz...'
+}
+
+response = requests.get('https://api.cryptotally.xyz/v1/wallets', headers=headers)
+```
+
+## Key Types
+
+| Type | Prefix | Environment | Use Case |
+|------|--------|-------------|----------|
+| Live | `ct_live_` | Production | Production applications |
+| Test | `ct_test_` | Development | Testing and development |
+
+<Note>
+  Test keys only work with test mode data and won't affect your production wallets.
+</Note>
+
+## Security Best Practices
+
+<AccordionGroup>
+  <Accordion title="Keep Keys Secret">
+    Never commit API keys to version control or expose them in client-side code.
+  </Accordion>
+  <Accordion title="Use Environment Variables">
+    Store API keys in environment variables or secret management systems.
+  </Accordion>
+  <Accordion title="Rotate Keys Regularly">
+    Generate new keys periodically and revoke old ones.
+  </Accordion>
+  <Accordion title="Use Minimal Permissions">
+    Create separate keys for different applications with appropriate scopes.
+  </Accordion>
+</AccordionGroup>
+
+## Key Permissions
+
+Configure what each API key can access:
+
+- **Read-only**: View wallets and transactions (recommended for dashboards)
+- **Read-Write**: View and modify tags, notes, attachments
+- **Full Access**: All operations including exports and webhooks
+
+## Revoking Keys
+
+If a key is compromised:
+
+1. Go to API Keys page
+2. Click the 🗑️ icon next to the key
+3. Confirm revocation
+4. Update your applications with a new key
+
+<Warning>
+  Revoking a key immediately invalidates all requests using that key.
+</Warning>

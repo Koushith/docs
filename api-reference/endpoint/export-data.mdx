@@ -1,0 +1,579 @@
+---
+title: "Export Data"
+api: "POST /api/v1/exports"
+description: "Generate CSV or PDF exports of transaction data with custom filters"
+---
+
+## Authentication
+
+This endpoint requires authentication via Bearer token.
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Request Body
+
+<ParamField body="workspace_id" type="string" required>
+  The workspace ID to export data from
+</ParamField>
+
+<ParamField body="format" type="string" required>
+  Export format
+  - `csv` - Spreadsheet-compatible CSV file
+  - `pdf` - Professional PDF report with charts
+  - `json` - Raw JSON data (for programmatic use)
+</ParamField>
+
+<ParamField body="report_type" type="string">
+  PDF report template (required if format is `pdf`)
+  - `summary` - High-level overview with charts
+  - `detailed` - Transaction-by-transaction listing
+  - `tax` - Tax-ready report organized by category
+  - `audit` - Comprehensive report with attachments
+</ParamField>
+
+<ParamField body="filters" type="object">
+  <Expandable title="Filter Options">
+    <ParamField body="wallet_ids" type="array">
+      Array of wallet IDs to include
+    </ParamField>
+
+    <ParamField body="chain" type="string">
+      Filter by blockchain network
+    </ParamField>
+
+    <ParamField body="token" type="string">
+      Filter by token symbol
+    </ParamField>
+
+    <ParamField body="direction" type="string">
+      Filter by transaction direction (inflow, outflow)
+    </ParamField>
+
+    <ParamField body="tag_ids" type="array">
+      Array of tag IDs to filter by
+    </ParamField>
+
+    <ParamField body="start_date" type="string">
+      Start date (YYYY-MM-DD)
+    </ParamField>
+
+    <ParamField body="end_date" type="string">
+      End date (YYYY-MM-DD)
+    </ParamField>
+
+    <ParamField body="min_amount" type="number">
+      Minimum transaction amount
+    </ParamField>
+
+    <ParamField body="max_amount" type="number">
+      Maximum transaction amount
+    </ParamField>
+
+    <ParamField body="has_tags" type="boolean">
+      Filter tagged/untagged transactions
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="columns" type="array">
+  CSV-specific: Array of column names to include (optional, defaults to all)
+  - `date`
+  - `tx_hash`
+  - `from_address`
+  - `to_address`
+  - `wallet_label`
+  - `chain`
+  - `token`
+  - `amount`
+  - `fiat_value`
+  - `direction`
+  - `type`
+  - `tags`
+  - `notes`
+  - `attachments`
+</ParamField>
+
+<ParamField body="options" type="object">
+  <Expandable title="Export Options">
+    <ParamField body="currency" type="string" default="USD">
+      Fiat currency for values (USD, EUR, GBP, INR)
+    </ParamField>
+
+    <ParamField body="date_format" type="string" default="YYYY-MM-DD">
+      Date format (YYYY-MM-DD, MM/DD/YYYY, DD/MM/YYYY)
+    </ParamField>
+
+    <ParamField body="include_summary" type="boolean" default="true">
+      Include summary statistics (CSV/JSON only)
+    </ParamField>
+
+    <ParamField body="group_by" type="string">
+      Group transactions by (month, wallet, tag, token)
+    </ParamField>
+
+    <ParamField body="pdf_title" type="string">
+      Custom title for PDF reports
+    </ParamField>
+
+    <ParamField body="include_logo" type="boolean" default="true">
+      Include workspace logo in PDF (if available)
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="delivery" type="object">
+  <Expandable title="Delivery Options">
+    <ParamField body="method" type="string" default="download">
+      Delivery method
+      - `download` - Return download URL (default)
+      - `email` - Send to email addresses
+      - `webhook` - POST to webhook URL when ready
+    </ParamField>
+
+    <ParamField body="email_recipients" type="array">
+      Email addresses (required if method is `email`)
+    </ParamField>
+
+    <ParamField body="webhook_url" type="string">
+      Webhook URL (required if method is `webhook`)
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Response
+
+### For `download` method (immediate, small exports)
+
+<ResponseField name="success" type="boolean">
+  Indicates if the export was created successfully
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  <Expandable title="Export Object">
+    <ResponseField name="id" type="string">
+      Unique export identifier
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Export status (completed, processing, failed)
+    </ResponseField>
+
+    <ResponseField name="format" type="string">
+      Export format (csv, pdf, json)
+    </ResponseField>
+
+    <ResponseField name="download_url" type="string">
+      URL to download the file (expires in 24 hours)
+    </ResponseField>
+
+    <ResponseField name="file_size" type="number">
+      File size in bytes
+    </ResponseField>
+
+    <ResponseField name="transaction_count" type="number">
+      Number of transactions in export
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Creation timestamp (ISO 8601)
+    </ResponseField>
+
+    <ResponseField name="expires_at" type="string">
+      Download URL expiration (ISO 8601)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### For `email` or `webhook` methods (async, large exports)
+
+<ResponseField name="success" type="boolean">
+  Indicates if the export job was queued successfully
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  <Expandable title="Export Job">
+    <ResponseField name="id" type="string">
+      Unique export job identifier
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Job status (queued, processing)
+    </ResponseField>
+
+    <ResponseField name="estimated_completion" type="string">
+      Estimated completion time (ISO 8601)
+    </ResponseField>
+
+    <ResponseField name="status_url" type="string">
+      URL to check export status
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example Requests
+
+### CSV Export (Basic)
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST "https://api.cryptotally.xyz/v1/exports" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workspace_id": "ws_123",
+    "format": "csv",
+    "filters": {
+      "start_date": "2024-01-01",
+      "end_date": "2024-12-31",
+      "direction": "inflow"
+    },
+    "delivery": {
+      "method": "download"
+    }
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.cryptotally.xyz/v1/exports', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    workspace_id: 'ws_123',
+    format: 'csv',
+    filters: {
+      start_date: '2024-01-01',
+      end_date: '2024-12-31',
+      direction: 'inflow'
+    },
+    delivery: {
+      method: 'download'
+    }
+  })
+});
+
+const { data } = await response.json();
+console.log('Download URL:', data.download_url);
+```
+
+```python Python
+import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+}
+
+payload = {
+    'workspace_id': 'ws_123',
+    'format': 'csv',
+    'filters': {
+        'start_date': '2024-01-01',
+        'end_date': '2024-12-31',
+        'tag_ids': ['tag_payment']
+    },
+    'delivery': {
+        'method': 'download'
+    }
+}
+
+response = requests.post(
+    'https://api.cryptotally.xyz/v1/exports',
+    headers=headers,
+    json=payload
+)
+
+data = response.json()
+print('Download URL:', data['data']['download_url'])
+```
+
+```typescript TypeScript
+interface ExportRequest {
+  workspace_id: string;
+  format: 'csv' | 'pdf' | 'json';
+  filters?: ExportFilters;
+  columns?: string[];
+  options?: ExportOptions;
+  delivery?: DeliveryOptions;
+}
+
+const createExport = async (payload: ExportRequest): Promise<string> => {
+  const response = await fetch('https://api.cryptotally.xyz/v1/exports', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.CRYPTOTALLY_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const { data } = await response.json();
+  return data.download_url;
+};
+```
+
+</CodeGroup>
+
+### PDF Tax Report
+
+```json
+{
+  "workspace_id": "ws_123",
+  "format": "pdf",
+  "report_type": "tax",
+  "filters": {
+    "start_date": "2024-01-01",
+    "end_date": "2024-12-31"
+  },
+  "options": {
+    "currency": "USD",
+    "pdf_title": "CryptoTally Tax Report 2024",
+    "include_logo": true
+  },
+  "delivery": {
+    "method": "email",
+    "email_recipients": ["accountant@example.com", "me@example.com"]
+  }
+}
+```
+
+### Custom CSV with Specific Columns
+
+```json
+{
+  "workspace_id": "ws_123",
+  "format": "csv",
+  "filters": {
+    "tag_ids": ["tag_customer"],
+    "start_date": "2024-01-01",
+    "end_date": "2024-03-31"
+  },
+  "columns": [
+    "date",
+    "token",
+    "amount",
+    "fiat_value",
+    "tags",
+    "notes"
+  ],
+  "options": {
+    "date_format": "MM/DD/YYYY",
+    "currency": "USD",
+    "include_summary": true
+  },
+  "delivery": {
+    "method": "download"
+  }
+}
+```
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "exp_abc123",
+    "status": "completed",
+    "format": "csv",
+    "download_url": "https://storage.cryptotally.xyz/exports/exp_abc123.csv?token=xyz789&expires=1711065600",
+    "file_size": 145678,
+    "transaction_count": 147,
+    "created_at": "2024-03-20T10:30:00Z",
+    "expires_at": "2024-03-21T10:30:00Z"
+  }
+}
+```
+
+## Downloading the Export
+
+Once you receive the `download_url`, download the file:
+
+```bash
+curl -O "https://storage.cryptotally.xyz/exports/exp_abc123.csv?token=xyz789&expires=1711065600"
+```
+
+<Warning>
+  Download URLs expire after 24 hours. If the link expires, create a new export request.
+</Warning>
+
+## Export Templates
+
+### Annual Tax Export (US)
+```json
+{
+  "workspace_id": "ws_123",
+  "format": "csv",
+  "filters": {
+    "start_date": "2024-01-01",
+    "end_date": "2024-12-31"
+  },
+  "columns": ["date", "token", "amount", "fiat_value", "direction", "tags", "notes"],
+  "options": {
+    "currency": "USD",
+    "date_format": "MM/DD/YYYY",
+    "group_by": "month"
+  }
+}
+```
+
+### Quarterly Business Report
+```json
+{
+  "workspace_id": "ws_123",
+  "format": "pdf",
+  "report_type": "summary",
+  "filters": {
+    "start_date": "2024-01-01",
+    "end_date": "2024-03-31"
+  },
+  "options": {
+    "pdf_title": "Q1 2024 Financial Summary",
+    "include_logo": true
+  }
+}
+```
+
+### Vendor Expense Report
+```json
+{
+  "workspace_id": "ws_123",
+  "format": "csv",
+  "filters": {
+    "direction": "outflow",
+    "tag_ids": ["tag_vendor"],
+    "start_date": "2024-01-01",
+    "end_date": "2024-12-31"
+  },
+  "options": {
+    "group_by": "tag"
+  }
+}
+```
+
+## Error Responses
+
+<ResponseExample>
+
+```json 400 Bad Request
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_DATE_RANGE",
+    "message": "end_date must be after start_date",
+    "field": "filters.end_date"
+  }
+}
+```
+
+```json 400 Bad Request
+{
+  "success": false,
+  "error": {
+    "code": "MISSING_REPORT_TYPE",
+    "message": "report_type is required when format is 'pdf'",
+    "field": "report_type"
+  }
+}
+```
+
+```json 413 Payload Too Large
+{
+  "success": false,
+  "error": {
+    "code": "EXPORT_TOO_LARGE",
+    "message": "Export exceeds 50,000 transactions. Please narrow your date range or filters.",
+    "max_transactions": 50000,
+    "requested_transactions": 87432
+  }
+}
+```
+
+</ResponseExample>
+
+## Rate Limits & Quotas
+
+| Tier | Max Transactions per Export | Exports per Hour | Concurrent Exports |
+|------|------------------------------|------------------|-------------------|
+| Free | 1,000 | 10 | 1 |
+| Pro | 50,000 | 100 | 5 |
+| Enterprise | Unlimited | Unlimited | 20 |
+
+## Checking Export Status
+
+For async exports (email/webhook delivery):
+
+```bash
+GET /api/v1/exports/:export_id
+```
+
+Response:
+```json
+{
+  "success": true,
+  "data": {
+    "id": "exp_abc123",
+    "status": "processing",
+    "progress": 67,
+    "estimated_completion": "2024-03-20T10:35:00Z"
+  }
+}
+```
+
+## Webhook Notification
+
+If you use `webhook` delivery method, CryptoTally will POST to your URL when the export is ready:
+
+```json
+{
+  "event": "export.completed",
+  "export_id": "exp_abc123",
+  "format": "csv",
+  "download_url": "https://storage.cryptotally.xyz/exports/exp_abc123.csv?token=xyz789",
+  "transaction_count": 147,
+  "file_size": 145678,
+  "expires_at": "2024-03-21T10:30:00Z"
+}
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Use date filters to reduce export size">
+    Instead of exporting all-time data, break it into yearly or quarterly exports.
+  </Accordion>
+
+  <Accordion title="Schedule exports during off-peak hours">
+    Large exports consume resources. Run them during low-traffic periods.
+  </Accordion>
+
+  <Accordion title="Archive exports securely">
+    Download and store exports in a secure location for record-keeping.
+  </Accordion>
+
+  <Accordion title="Use webhook delivery for large exports">
+    Don't wait for large exports to complete. Get notified when ready.
+  </Accordion>
+</AccordionGroup>
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Get Transactions" icon="list" href="/api-reference/endpoint/get-transactions">
+    Fetch transaction data programmatically
+  </Card>
+  <Card title="Get Export Status" icon="clock" href="/api-reference/endpoint/get-export">
+    Check export job progress
+  </Card>
+  <Card title="List Exports" icon="folder-open" href="/api-reference/endpoint/list-exports">
+    View export history
+  </Card>
+  <Card title="Webhooks" icon="webhook" href="/api-reference/webhooks">
+    Set up webhook notifications
+  </Card>
+</CardGroup>

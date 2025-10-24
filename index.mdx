@@ -1,97 +1,163 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: Introduction
+description: 'Welcome to CryptoTally - The easiest way to track crypto transactions for tax filing'
 ---
 
-## Setting up
+<img
+  className="block dark:hidden"
+  src="/images/hero-light.png"
+  alt="Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/hero-dark.png"
+  alt="Hero Dark"
+/>
 
-Get your documentation site up and running in minutes.
+## What is CryptoTally?
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
+CryptoTally is a **crypto accounting tool** designed for startups, freelancers, and individuals who receive payments in cryptocurrency. We solve the common problem of tracking crypto transactions across multiple wallets and chains for tax filing and revenue tracking.
 
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
+<CardGroup cols={2}>
   <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
+    title="Multi-Chain Support"
+    icon="link"
+    href="/concepts/wallets"
   >
-    Edit your docs locally and preview them in real time.
+    Track wallets across Ethereum, Polygon, Arbitrum, and BNB Chain
   </Card>
   <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
+    title="Auto-Sync Transactions"
+    icon="rotate"
+    href="/concepts/transactions"
   >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+    Automatic blockchain transaction fetching with fiat values
   </Card>
   <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
+    title="Tag & Categorize"
+    icon="tags"
+    href="/concepts/tagging"
   >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
-
-## Create beautiful pages
-
-Everything you need to create world-class documentation.
-
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
+    Organize transactions with custom tags and notes
   </Card>
   <Card
-    title="Code samples"
+    title="Export Reports"
+    icon="file-export"
+    href="/concepts/exports"
+  >
+    Generate CSV exports perfect for accountants and tax filing
+  </Card>
+</CardGroup>
+
+## The Problem We Solve
+
+When receiving payments in USDC, ETH, or other cryptocurrencies:
+
+- ❌ Transactions are easily forgotten
+- ❌ End up with 100+ unorganized transactions
+- ❌ Causes panic during tax filing season
+- ❌ Manual tracking via Etherscan is tedious and error-prone
+
+## The CryptoTally Solution
+
+<Steps>
+  <Step title="Connect Your Wallets">
+    Add wallet addresses (read-only) from multiple chains
+  </Step>
+  <Step title="Auto-Sync Transactions">
+    We fetch all transactions automatically with fiat values
+  </Step>
+  <Step title="Tag & Organize">
+    Categorize transactions with custom tags and notes
+  </Step>
+  <Step title="Export for Taxes">
+    Generate clean reports for your accountant or tax software
+  </Step>
+</Steps>
+
+## Who Is This For?
+
+<AccordionGroup>
+  <Accordion icon="building" title="Startups">
+    Track crypto payments received for your SaaS, manage treasury, and prepare grant reports
+  </Accordion>
+  <Accordion icon="user" title="Freelancers">
+    Monitor client payments in crypto, track project income, and organize for tax season
+  </Accordion>
+  <Accordion icon="briefcase" title="DAOs & Organizations">
+    Manage organizational wallets, track expenses, and generate audit-ready reports
+  </Accordion>
+  <Accordion icon="calculator" title="Accountants">
+    Help clients with crypto income by accessing clean, categorized transaction records
+  </Accordion>
+</AccordionGroup>
+
+## Key Features
+
+<CardGroup cols={3}>
+  <Card title="Read-Only Tracking" icon="eye">
+    No private keys needed. Just add wallet addresses.
+  </Card>
+  <Card title="Multi-Chain" icon="network-wired">
+    Support for Ethereum, Polygon, Arbitrum, and more.
+  </Card>
+  <Card title="Fiat Values" icon="dollar-sign">
+    Historical fiat values at time of transaction.
+  </Card>
+  <Card title="Custom Tags" icon="tag">
+    Organize with tags like "Customer Payment" or "Vendor Expense".
+  </Card>
+  <Card title="Attachments" icon="paperclip">
+    Upload invoices and receipts (up to 10 per transaction).
+  </Card>
+  <Card title="CSV Export" icon="download">
+    Export filtered data for your accountant.
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+Ready to organize your crypto transactions?
+
+<CardGroup cols={2}>
+  <Card
+    title="Quickstart Guide"
+    icon="rocket"
+    href="/quickstart"
+  >
+    Get up and running in 5 minutes
+  </Card>
+  <Card
+    title="Watch Demo"
+    icon="play"
+    href="https://www.youtube.com/cryptotally"
+  >
+    See CryptoTally in action
+  </Card>
+</CardGroup>
+
+## Need Help?
+
+<CardGroup cols={3}>
+  <Card
+    title="Documentation"
+    icon="book"
+    href="/guides/getting-started"
+  >
+    Comprehensive guides and tutorials
+  </Card>
+  <Card
+    title="API Reference"
     icon="code"
-    href="/essentials/code"
+    href="/api-reference"
   >
-    Add sample code to demonstrate how to use your product.
+    Integrate CryptoTally into your workflow
   </Card>
   <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
+    title="Community"
+    icon="discord"
+    href="https://discord.gg/cryptotally"
   >
-    Display images and other media.
+    Join our Discord community
   </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+</CardGroup>

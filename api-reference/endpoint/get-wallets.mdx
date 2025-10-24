@@ -1,0 +1,343 @@
+---
+title: "Get Wallets"
+api: "GET /api/v1/wallets"
+description: "Retrieve all wallets for the authenticated workspace"
+---
+
+## Authentication
+
+This endpoint requires authentication via Bearer token.
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Request
+
+<ParamField query="workspace_id" type="string" required>
+  The workspace ID to fetch wallets for
+</ParamField>
+
+<ParamField query="chain" type="string">
+  Filter wallets by blockchain network
+  - `ethereum`
+  - `polygon`
+  - `arbitrum`
+  - `bsc`
+</ParamField>
+
+<ParamField query="page" type="number" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="limit" type="number" default="50">
+  Number of wallets per page (max 100)
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  <Expandable title="Wallet Object">
+    <ResponseField name="id" type="string">
+      Unique wallet identifier
+    </ResponseField>
+
+    <ResponseField name="address" type="string">
+      Blockchain wallet address (0x...)
+    </ResponseField>
+
+    <ResponseField name="label" type="string">
+      User-defined wallet label
+    </ResponseField>
+
+    <ResponseField name="chain" type="string">
+      Blockchain network (ethereum, polygon, arbitrum, bsc)
+    </ResponseField>
+
+    <ResponseField name="balance" type="object">
+      <Expandable title="Balance Details">
+        <ResponseField name="native" type="string">
+          Native token balance (ETH, MATIC, etc.)
+        </ResponseField>
+
+        <ResponseField name="tokens" type="array">
+          Array of ERC-20 token balances
+        </ResponseField>
+
+        <ResponseField name="fiat_value" type="number">
+          Total value in USD
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="transaction_count" type="number">
+      Total number of transactions
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Wallet creation timestamp (ISO 8601)
+    </ResponseField>
+
+    <ResponseField name="last_synced" type="string">
+      Last sync timestamp (ISO 8601)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="pagination" type="object">
+  <Expandable title="Pagination Info">
+    <ResponseField name="total" type="number">
+      Total number of wallets
+    </ResponseField>
+
+    <ResponseField name="page" type="number">
+      Current page number
+    </ResponseField>
+
+    <ResponseField name="pages" type="number">
+      Total number of pages
+    </ResponseField>
+
+    <ResponseField name="limit" type="number">
+      Results per page
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET "https://api.cryptotally.xyz/v1/wallets?workspace_id=ws_123&chain=ethereum" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.cryptotally.xyz/v1/wallets?workspace_id=ws_123', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY'
+  }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY'
+}
+
+params = {
+    'workspace_id': 'ws_123',
+    'chain': 'ethereum'
+}
+
+response = requests.get(
+    'https://api.cryptotally.xyz/v1/wallets',
+    headers=headers,
+    params=params
+)
+
+data = response.json()
+print(data)
+```
+
+```typescript TypeScript
+interface Wallet {
+  id: string;
+  address: string;
+  label: string;
+  chain: string;
+  balance: {
+    native: string;
+    tokens: Token[];
+    fiat_value: number;
+  };
+  transaction_count: number;
+  created_at: string;
+  last_synced: string;
+}
+
+const getWallets = async (workspaceId: string): Promise<Wallet[]> => {
+  const response = await fetch(`https://api.cryptotally.xyz/v1/wallets?workspace_id=${workspaceId}`, {
+    headers: {
+      'Authorization': `Bearer ${process.env.CRYPTOTALLY_API_KEY}`
+    }
+  });
+
+  const { data } = await response.json();
+  return data;
+};
+```
+
+</CodeGroup>
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "wlt_abc123",
+      "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+      "label": "Treasury",
+      "chain": "ethereum",
+      "balance": {
+        "native": "5.234",
+        "tokens": [
+          {
+            "symbol": "USDC",
+            "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "balance": "50000.00",
+            "fiat_value": 50000.00
+          },
+          {
+            "symbol": "DAI",
+            "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+            "balance": "10000.00",
+            "fiat_value": 10000.00
+          }
+        ],
+        "fiat_value": 69500.00
+      },
+      "transaction_count": 147,
+      "created_at": "2024-01-15T10:30:00Z",
+      "last_synced": "2024-03-20T14:22:00Z"
+    },
+    {
+      "id": "wlt_def456",
+      "address": "0x8Ba1f109551bD432803012645Ac136ddd64DBA72",
+      "label": "Operations",
+      "chain": "polygon",
+      "balance": {
+        "native": "1200.50",
+        "tokens": [
+          {
+            "symbol": "USDC",
+            "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+            "balance": "25000.00",
+            "fiat_value": 25000.00
+          }
+        ],
+        "fiat_value": 26500.00
+      },
+      "transaction_count": 89,
+      "created_at": "2024-02-01T09:15:00Z",
+      "last_synced": "2024-03-20T14:22:00Z"
+    }
+  ],
+  "pagination": {
+    "total": 2,
+    "page": 1,
+    "pages": 1,
+    "limit": 50
+  }
+}
+```
+
+## Error Responses
+
+<ResponseExample>
+
+```json 401 Unauthorized
+{
+  "success": false,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Invalid or missing API key"
+  }
+}
+```
+
+```json 403 Forbidden
+{
+  "success": false,
+  "error": {
+    "code": "FORBIDDEN",
+    "message": "You don't have access to this workspace"
+  }
+}
+```
+
+```json 404 Not Found
+{
+  "success": false,
+  "error": {
+    "code": "WORKSPACE_NOT_FOUND",
+    "message": "Workspace with ID 'ws_123' not found"
+  }
+}
+```
+
+```json 429 Rate Limited
+{
+  "success": false,
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "Too many requests. Please try again in 60 seconds.",
+    "retry_after": 60
+  }
+}
+```
+
+</ResponseExample>
+
+## Rate Limits
+
+- **Free Tier**: 100 requests per hour
+- **Pro Tier**: 1,000 requests per hour
+- **Enterprise Tier**: Custom limits
+
+Rate limit headers are included in the response:
+
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1679334400
+```
+
+## Filtering Examples
+
+### Get Ethereum wallets only
+```bash
+GET /api/v1/wallets?workspace_id=ws_123&chain=ethereum
+```
+
+### Paginate results
+```bash
+GET /api/v1/wallets?workspace_id=ws_123&page=2&limit=20
+```
+
+## Webhook Support
+
+Subscribe to wallet events:
+- `wallet.created` - New wallet added
+- `wallet.updated` - Wallet label or details changed
+- `wallet.synced` - Wallet sync completed
+- `wallet.deleted` - Wallet removed
+
+See [Webhooks](/api-reference/webhooks) for setup instructions.
+
+## Related Endpoints
+
+<Card title="Add Wallet" icon="plus" href="/api-reference/endpoint/create-wallet">
+  Create a new wallet in your workspace
+</Card>
+
+<Card title="Get Transactions" icon="list" href="/api-reference/endpoint/get-transactions">
+  Fetch transactions for a specific wallet
+</Card>
+
+<Card title="Sync Wallet" icon="rotate" href="/api-reference/endpoint/sync-wallet">
+  Manually trigger a wallet sync
+</Card>

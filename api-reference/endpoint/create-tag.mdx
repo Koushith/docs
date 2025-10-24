@@ -1,0 +1,483 @@
+---
+title: "Create Tag"
+api: "POST /api/v1/tags"
+description: "Create a new transaction tag for your workspace"
+---
+
+## Authentication
+
+This endpoint requires authentication via Bearer token.
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Request Body
+
+<ParamField body="workspace_id" type="string" required>
+  The workspace ID to create the tag in
+</ParamField>
+
+<ParamField body="name" type="string" required>
+  Tag name (e.g., "Customer Payment", "Vendor Expense")
+  - Min length: 1 character
+  - Max length: 50 characters
+  - Must be unique within workspace
+</ParamField>
+
+<ParamField body="type" type="string" required>
+  Tag type for categorization
+  - `income` - For revenue/income transactions
+  - `expense` - For costs/expense transactions
+  - `neutral` - For transfers or other transactions
+</ParamField>
+
+<ParamField body="color" type="string">
+  Hex color code for visual identification (default: auto-assigned)
+  - Format: `#RRGGBB`
+  - Example: `#10B981`
+</ParamField>
+
+<ParamField body="description" type="string">
+  Optional description explaining the tag's purpose
+  - Max length: 200 characters
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the tag was created successfully
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  <Expandable title="Tag Object">
+    <ResponseField name="id" type="string">
+      Unique tag identifier
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Tag name
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      Tag type (income, expense, neutral)
+    </ResponseField>
+
+    <ResponseField name="color" type="string">
+      Hex color code
+    </ResponseField>
+
+    <ResponseField name="description" type="string">
+      Tag description (if provided)
+    </ResponseField>
+
+    <ResponseField name="workspace_id" type="string">
+      Associated workspace ID
+    </ResponseField>
+
+    <ResponseField name="created_by" type="string">
+      User ID of creator
+    </ResponseField>
+
+    <ResponseField name="created_at" type="string">
+      Creation timestamp (ISO 8601)
+    </ResponseField>
+
+    <ResponseField name="usage_count" type="number">
+      Number of transactions using this tag (initially 0)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST "https://api.cryptotally.xyz/v1/tags" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workspace_id": "ws_123",
+    "name": "Customer Payment",
+    "type": "income",
+    "color": "#10B981",
+    "description": "Payments received from clients for services"
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.cryptotally.xyz/v1/tags', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    workspace_id: 'ws_123',
+    name: 'Customer Payment',
+    type: 'income',
+    color: '#10B981',
+    description: 'Payments received from clients for services'
+  })
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+}
+
+payload = {
+    'workspace_id': 'ws_123',
+    'name': 'Customer Payment',
+    'type': 'income',
+    'color': '#10B981',
+    'description': 'Payments received from clients for services'
+}
+
+response = requests.post(
+    'https://api.cryptotally.xyz/v1/tags',
+    headers=headers,
+    json=payload
+)
+
+data = response.json()
+print(data)
+```
+
+```typescript TypeScript
+interface CreateTagRequest {
+  workspace_id: string;
+  name: string;
+  type: 'income' | 'expense' | 'neutral';
+  color?: string;
+  description?: string;
+}
+
+interface Tag {
+  id: string;
+  name: string;
+  type: 'income' | 'expense' | 'neutral';
+  color: string;
+  description?: string;
+  workspace_id: string;
+  created_by: string;
+  created_at: string;
+  usage_count: number;
+}
+
+const createTag = async (payload: CreateTagRequest): Promise<Tag> => {
+  const response = await fetch('https://api.cryptotally.xyz/v1/tags', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.CRYPTOTALLY_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const { data } = await response.json();
+  return data;
+};
+```
+
+</CodeGroup>
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "tag_abc123",
+    "name": "Customer Payment",
+    "type": "income",
+    "color": "#10B981",
+    "description": "Payments received from clients for services",
+    "workspace_id": "ws_123",
+    "created_by": "usr_xyz789",
+    "created_at": "2024-03-20T10:30:00Z",
+    "usage_count": 0
+  }
+}
+```
+
+## Error Responses
+
+<ResponseExample>
+
+```json 400 Bad Request - Missing Field
+{
+  "success": false,
+  "error": {
+    "code": "MISSING_REQUIRED_FIELD",
+    "message": "The 'name' field is required",
+    "field": "name"
+  }
+}
+```
+
+```json 400 Bad Request - Invalid Type
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_TAG_TYPE",
+    "message": "Tag type must be 'income', 'expense', or 'neutral'",
+    "field": "type"
+  }
+}
+```
+
+```json 400 Bad Request - Invalid Color
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_COLOR_FORMAT",
+    "message": "Color must be a valid hex code (e.g., #10B981)",
+    "field": "color"
+  }
+}
+```
+
+```json 409 Conflict
+{
+  "success": false,
+  "error": {
+    "code": "TAG_ALREADY_EXISTS",
+    "message": "A tag with the name 'Customer Payment' already exists in this workspace",
+    "field": "name"
+  }
+}
+```
+
+```json 401 Unauthorized
+{
+  "success": false,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Invalid or missing API key"
+  }
+}
+```
+
+```json 403 Forbidden
+{
+  "success": false,
+  "error": {
+    "code": "INSUFFICIENT_PERMISSIONS",
+    "message": "You don't have permission to create tags in this workspace. Required role: Contributor or Admin"
+  }
+}
+```
+
+</ResponseExample>
+
+## Common Tag Examples
+
+### Income Tags
+
+```json
+{
+  "name": "Customer Payment",
+  "type": "income",
+  "color": "#10B981"
+}
+```
+
+```json
+{
+  "name": "Grant Funding",
+  "type": "income",
+  "color": "#3B82F6"
+}
+```
+
+```json
+{
+  "name": "Investment",
+  "type": "income",
+  "color": "#8B5CF6"
+}
+```
+
+### Expense Tags
+
+```json
+{
+  "name": "Vendor Payment",
+  "type": "expense",
+  "color": "#EF4444"
+}
+```
+
+```json
+{
+  "name": "Salary",
+  "type": "expense",
+  "color": "#F59E0B"
+}
+```
+
+```json
+{
+  "name": "Gas Fees",
+  "type": "expense",
+  "color": "#6B7280"
+}
+```
+
+### Neutral Tags
+
+```json
+{
+  "name": "Transfer",
+  "type": "neutral",
+  "color": "#64748B"
+}
+```
+
+```json
+{
+  "name": "Asset Purchase",
+  "type": "neutral",
+  "color": "#0EA5E9"
+}
+```
+
+## Bulk Tag Creation
+
+To create multiple tags at once, send multiple requests in parallel:
+
+```javascript
+const tags = [
+  { name: 'Customer Payment', type: 'income', color: '#10B981' },
+  { name: 'Vendor Payment', type: 'expense', color: '#EF4444' },
+  { name: 'Salary', type: 'expense', color: '#F59E0B' }
+];
+
+const results = await Promise.all(
+  tags.map(tag =>
+    fetch('https://api.cryptotally.xyz/v1/tags', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...tag, workspace_id: 'ws_123' })
+    }).then(res => res.json())
+  )
+);
+
+console.log(results);
+```
+
+## Tag Management Operations
+
+### Get All Tags
+```bash
+GET /api/v1/tags?workspace_id=ws_123
+```
+
+### Update Tag
+```bash
+PATCH /api/v1/tags/:tag_id
+```
+
+### Delete Tag
+```bash
+DELETE /api/v1/tags/:tag_id
+```
+
+### Apply Tag to Transaction
+```bash
+POST /api/v1/transactions/:transaction_id/tags
+```
+
+## Tag Naming Best Practices
+
+<AccordionGroup>
+  <Accordion title="Use clear, descriptive names">
+    ✅ "Customer Payment" ❌ "CP"
+    ✅ "Vendor Expense" ❌ "Expense1"
+  </Accordion>
+
+  <Accordion title="Be consistent with naming conventions">
+    Choose one style and stick with it:
+    - Title Case: "Customer Payment"
+    - Sentence case: "Customer payment"
+    - lowercase: "customer payment"
+  </Accordion>
+
+  <Accordion title="Avoid duplicate or similar tags">
+    ❌ "Client Payment" and "Customer Payment"
+    ✅ Choose one term and use it consistently
+  </Accordion>
+
+  <Accordion title="Use specific names when needed">
+    For project-specific tracking:
+    - "Grant - Phase 1"
+    - "Client A - Q1 2024"
+    - "Marketing - Social Media"
+  </Accordion>
+</AccordionGroup>
+
+## Color Palette Suggestions
+
+### Income (Green Shades)
+- `#10B981` - Emerald (Default income color)
+- `#22C55E` - Green
+- `#84CC16` - Lime
+
+### Expense (Red/Orange Shades)
+- `#EF4444` - Red (Default expense color)
+- `#F59E0B` - Amber
+- `#F97316` - Orange
+
+### Neutral (Blue/Gray Shades)
+- `#64748B` - Slate (Default neutral color)
+- `#3B82F6` - Blue
+- `#0EA5E9` - Sky
+
+### Category-Specific
+- `#8B5CF6` - Purple (Investments, Assets)
+- `#EC4899` - Pink (Subscriptions, Recurring)
+- `#14B8A6` - Teal (Payroll, HR)
+
+## Rate Limits
+
+- **Free Tier**: 100 tags per workspace, 100 API requests/hour
+- **Pro Tier**: 500 tags per workspace, 1,000 API requests/hour
+- **Enterprise Tier**: Unlimited tags, custom rate limits
+
+## Webhooks
+
+Subscribe to tag events:
+- `tag.created` - New tag created
+- `tag.updated` - Tag name or details changed
+- `tag.deleted` - Tag removed
+
+See [Webhooks](/api-reference/webhooks) for setup instructions.
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Get Tags" icon="list" href="/api-reference/endpoint/get-tags">
+    Fetch all workspace tags
+  </Card>
+  <Card title="Update Tag" icon="pen" href="/api-reference/endpoint/update-tag">
+    Modify tag details
+  </Card>
+  <Card title="Delete Tag" icon="trash" href="/api-reference/endpoint/delete-tag">
+    Remove a tag
+  </Card>
+  <Card title="Apply Tag to Transaction" icon="tag" href="/api-reference/endpoint/apply-tag">
+    Tag a transaction
+  </Card>
+</CardGroup>

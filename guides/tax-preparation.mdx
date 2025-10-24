@@ -1,0 +1,486 @@
+---
+title: 'Tax Preparation'
+description: 'Prepare accurate crypto tax filings with organized transaction data'
+---
+
+## Overview
+
+CryptoTally simplifies crypto tax preparation by automatically tracking fiat values, organizing transactions by category, and generating tax-ready reports. This guide covers best practices for using CryptoTally to prepare for tax season.
+
+<Warning>
+  CryptoTally provides transaction tracking and reporting tools but is **not** tax software or tax advice. Always consult with a qualified tax professional or CPA for tax filing.
+</Warning>
+
+## Tax Obligations for Crypto
+
+### When Crypto Is Taxable
+
+In most jurisdictions, cryptocurrency transactions trigger tax obligations:
+
+<CardGroup cols={2}>
+  <Card title="Income Events" icon="arrow-down">
+    - Receiving payment for goods/services
+    - Freelance/contractor payments
+    - Salary paid in crypto
+    - Mining or staking rewards
+    - Airdrops
+  </Card>
+  <Card title="Capital Gains Events" icon="chart-line">
+    - Selling crypto for fiat
+    - Trading one crypto for another
+    - Using crypto to purchase goods
+    - DeFi swaps
+  </Card>
+</CardGroup>
+
+<Info>
+  Tax treatment varies by country. The examples below primarily cover **US tax treatment**. Consult local tax authorities for your jurisdiction.
+</Info>
+
+## CryptoTally's Tax Features
+
+### 1. Automatic Fiat Valuation
+CryptoTally records the **fair market value in USD** (or your chosen currency) at the time of each transaction using historical price data.
+
+### 2. Income Categorization
+Tag transactions as:
+- **Customer Payment** (Business income)
+- **Salary** (W-2 or contractor income)
+- **Grant** (Varies by grant type)
+- **Interest/Yield** (Investment income)
+
+### 3. Expense Tracking
+Categorize deductible expenses:
+- **Vendor Payment** (Business expenses)
+- **Gas Fees** (Transaction costs)
+- **Software/Tools** (Operating expenses)
+
+### 4. Tax-Ready Reports
+Export CSV files formatted for:
+- Tax software (TurboTax, TaxAct, etc.)
+- Accountant review
+- IRS reporting (Schedule C, Form 8949)
+
+## Preparing for Tax Season
+
+### Step 1: Tag All Transactions
+
+Before generating tax reports, ensure **all transactions are properly tagged**:
+
+<Steps>
+  <Step title="Review Untagged Transactions">
+    Go to **Transactions** → Filter by "Untagged"
+  </Step>
+
+  <Step title="Categorize Income">
+    Tag all inflows:
+    - Customer Payment
+    - Salary
+    - Grant
+    - Interest/Yield
+    - Other Income
+  </Step>
+
+  <Step title="Categorize Expenses">
+    Tag all outflows:
+    - Vendor Payment
+    - Contractor
+    - Gas Fees
+    - Operating Expenses
+    - Personal (if mixing personal/business)
+  </Step>
+
+  <Step title="Mark Transfers">
+    Tag wallet-to-wallet transfers to avoid double-counting
+  </Step>
+</Steps>
+
+### Step 2: Review Fiat Values
+
+CryptoTally automatically captures fiat values, but you should:
+
+1. Spot-check major transactions
+2. Verify values for large payments
+3. Flag any suspicious values for manual review
+
+<Tip>
+  If a price seems wrong, you can manually override it in transaction details by clicking "Edit Fiat Value"
+</Tip>
+
+### Step 3: Separate Personal vs. Business
+
+If you mix personal and business transactions:
+
+1. Create tags: **Business** and **Personal**
+2. Apply appropriate tags to all transactions
+3. Generate separate reports for each
+
+### Step 4: Reconcile Wallet Balances
+
+Before exporting:
+1. Go to **Wallets** page
+2. Compare CryptoTally balances with actual wallet balances
+3. Investigate any discrepancies
+4. Refresh wallet sync if needed
+
+## Generating Tax Reports
+
+### For US Freelancers & Contractors
+
+<AccordionGroup>
+  <Accordion title="Schedule C (Business Income)">
+    **Report Configuration:**
+    - Date Range: Full tax year (Jan 1 - Dec 31)
+    - Tags: Customer Payment, Business Income
+    - Direction: Inflows
+    - Format: CSV
+
+    **Export Includes:**
+    - Date received
+    - Amount in crypto
+    - Fiat value (income amount)
+    - Customer/client (from notes)
+    - Description
+
+    **Tax Form:** Schedule C (Part I - Income)
+  </Accordion>
+
+  <Accordion title="Business Expenses">
+    **Report Configuration:**
+    - Date Range: Full tax year
+    - Tags: Vendor Payment, Contractor, Software, Gas Fees
+    - Direction: Outflows
+    - Format: CSV
+
+    **Export Includes:**
+    - Date paid
+    - Vendor (from notes)
+    - Amount
+    - Category (from tags)
+    - Description
+
+    **Tax Form:** Schedule C (Part II - Expenses)
+  </Accordion>
+
+  <Accordion title="Form 8949 (Capital Gains)">
+    For transactions involving selling or trading crypto:
+
+    **Report Configuration:**
+    - Date Range: Full tax year
+    - Tags: Asset Sale, Swap, Trade
+    - Format: CSV with cost basis
+
+    **You'll Need:**
+    - Date acquired
+    - Date sold
+    - Proceeds (sale price)
+    - Cost basis (purchase price)
+    - Gain/loss
+
+    <Info>
+      CryptoTally currently tracks transaction history. Cost basis tracking and capital gains calculations are **coming soon**.
+    </Info>
+  </Accordion>
+</AccordionGroup>
+
+### For Startups & Organizations
+
+<AccordionGroup>
+  <Accordion title="Revenue Recognition">
+    Track when crypto payments are received for accounting purposes:
+
+    **Report Configuration:**
+    - Tags: Customer Payment, Subscription, Grant
+    - Direction: Inflows
+    - Group by: Month
+
+    **Use Case:** Recognize revenue in appropriate accounting period
+  </Accordion>
+
+  <Accordion title="Expense Deductions">
+    Document all business expenses paid in crypto:
+
+    **Report Configuration:**
+    - Tags: All expense tags
+    - Direction: Outflows
+    - Include: Attachments (invoices, receipts)
+
+    **Use Case:** Support deductions during audit
+  </Accordion>
+
+  <Accordion title="Payroll Reporting">
+    Track employee compensation paid in crypto:
+
+    **Report Configuration:**
+    - Tags: Salary, Payroll
+    - Direction: Outflows
+    - Group by: Employee (use notes)
+
+    **Use Case:** File W-2s or 1099s for employees/contractors
+  </Accordion>
+</AccordionGroup>
+
+## Tax Software Integration
+
+### TurboTax / TaxAct
+1. Generate CSV export from CryptoTally
+2. Open tax software
+3. Import CSV as business income/expenses
+4. Map CryptoTally tags to tax categories
+5. Review and finalize
+
+### QuickBooks / Xero (Manual Entry)
+1. Export monthly CSV reports
+2. Import as journal entries
+3. Map to chart of accounts:
+   - Income → Revenue accounts
+   - Expenses → Expense accounts
+4. Reconcile monthly
+
+<Info>
+  **Coming Soon:** Direct integrations with QuickBooks, Xero, and TurboTax for one-click import
+</Info>
+
+## Common Tax Scenarios
+
+### Scenario 1: Freelancer Paid in USDC
+
+**Situation:** You received $50,000 in USDC payments from clients in 2024.
+
+**CryptoTally Setup:**
+1. Tag all client payments as "Customer Payment"
+2. Add notes with client names and invoice numbers
+3. Attach invoices as documentation
+
+**Tax Report:**
+- Export: CSV with all Customer Payment transactions
+- Report shows: Date, Amount (USDC), Fiat Value ($50,000)
+- Tax Form: Schedule C, Line 1 (Gross receipts)
+
+### Scenario 2: Startup with Grant Funding
+
+**Situation:** Organization received $100,000 grant in ETH, spent on development.
+
+**CryptoTally Setup:**
+1. Tag grant receipt as "Grant Funding"
+2. Tag all grant-related expenses with "Grant Expense"
+3. Use dedicated wallet for grant funds
+
+**Tax Report:**
+- Export: PDF Audit Report showing:
+  - Grant receipt transaction
+  - All expenses paid from grant wallet
+  - Attached receipts and invoices
+- For Auditor: Proof of proper fund usage
+
+### Scenario 3: Multi-Wallet Business
+
+**Situation:** Company uses 3 wallets across Ethereum and Polygon.
+
+**CryptoTally Setup:**
+1. Add all wallets with labels (Treasury, Operations, Payroll)
+2. Tag transactions consistently across wallets
+3. Mark internal transfers between wallets
+
+**Tax Report:**
+- Export: Consolidated CSV across all wallets
+- Exclude: Internal transfers (to avoid double-counting)
+- Result: Clean income and expense summary
+
+## Record Keeping Best Practices
+
+<Card title="Keep Records for 7 Years" icon="clock">
+  The IRS recommends keeping tax records for at least 3 years, but 7 years is safer for crypto transactions.
+</Card>
+
+<Card title="Attach Supporting Documents" icon="paperclip">
+  Upload invoices, receipts, and contracts to CryptoTally for each transaction. This creates a digital audit trail.
+</Card>
+
+<Card title="Document Unusual Transactions" icon="note">
+  Add detailed notes for large or unusual transactions explaining the business purpose.
+</Card>
+
+<Card title="Export Annually" icon="download">
+  Even if you don't need it immediately, export a full-year report at year-end and archive it securely.
+</Card>
+
+## Tax Deductions for Crypto Businesses
+
+### Potentially Deductible Expenses
+
+If you run a business that accepts crypto:
+
+- **Gas fees** on business transactions
+- **Exchange fees** for converting crypto to fiat
+- **Accounting software** (including CryptoTally!)
+- **Professional fees** (CPA, tax advisor)
+- **Hardware wallets** for business security
+- **Blockchain infrastructure** (RPC nodes, APIs)
+
+<Warning>
+  Personal expenses are **not** deductible. Only business-related crypto expenses qualify.
+</Warning>
+
+## Working with a CPA
+
+### Preparing for Your CPA Meeting
+
+1. **Generate Annual Report** from CryptoTally (full year, all transactions)
+2. **Export CSV** with all columns enabled
+3. **Gather Supporting Docs:**
+   - Bank statements showing fiat conversions
+   - Invoices for major transactions
+   - Wallet address verification
+4. **Organize by Category:**
+   - Income by type (business, freelance, investment)
+   - Expenses by category
+   - Capital gains/losses (if applicable)
+
+### Questions Your CPA May Ask
+
+<AccordionGroup>
+  <Accordion title="How did you determine fair market value?">
+    CryptoTally uses CoinGecko API for historical price data at transaction time.
+  </Accordion>
+
+  <Accordion title="Can you verify wallet ownership?">
+    Yes, you can sign a message with your wallet or show transaction history on blockchain explorers.
+  </Accordion>
+
+  <Accordion title="Are there any missing transactions?">
+    CryptoTally syncs automatically, but you should reconcile balances to ensure completeness.
+  </Accordion>
+
+  <Accordion title="How are internal transfers handled?">
+    Tag as "Transfer" to exclude from income/expense calculations.
+  </Accordion>
+</AccordionGroup>
+
+### Sharing Data with Your CPA
+
+1. Generate PDF or CSV report
+2. Share via secure method:
+   - CPA's client portal
+   - Encrypted email
+   - Secure file sharing
+3. Provide CryptoTally export along with:
+   - Blockchain explorer links
+   - Bank statements
+   - Invoices/receipts
+
+## International Tax Considerations
+
+<AccordionGroup>
+  <Accordion title="United States">
+    - Crypto is property (not currency) for tax purposes
+    - Subject to capital gains tax
+    - Business income taxed as ordinary income
+    - Report on Form 8949, Schedule C, or Schedule D
+  </Accordion>
+
+  <Accordion title="European Union">
+    - Tax treatment varies by country
+    - Some countries tax as income, others as capital gains
+    - VAT may apply to certain transactions
+    - Consult local tax authority (HMRC, Finanzamt, etc.)
+  </Accordion>
+
+  <Accordion title="United Kingdom">
+    - HMRC treats crypto as assets
+    - Capital Gains Tax applies to disposals
+    - Income Tax for mining/staking/airdrops
+    - Annual CGT allowance (£3,000 for 2024/25)
+  </Accordion>
+
+  <Accordion title="India">
+    - 30% tax on crypto gains (Section 115BBH)
+    - 1% TDS on transactions above ₹10,000
+    - No deduction for expenses (except acquisition cost)
+    - Report on ITR forms
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+  CryptoTally supports multiple currencies. Set your preferred currency in **Settings** → **Preferences**
+</Info>
+
+## Common Mistakes to Avoid
+
+❌ **Not tracking every transaction** - Even small amounts are taxable
+❌ **Forgetting gas fees** - These are deductible business expenses
+❌ **Double-counting transfers** - Mark wallet-to-wallet moves as "Transfer"
+❌ **Missing documentation** - Attach invoices and receipts
+❌ **Using wrong cost basis** - Track when you acquired crypto (coming soon in CryptoTally)
+❌ **Waiting until April** - Start organizing transactions throughout the year
+
+## Tax Season Checklist
+
+<Steps>
+  <Step title="Review All Transactions (January)">
+    - [ ] All transactions tagged
+    - [ ] Notes added for major transactions
+    - [ ] Attachments uploaded
+    - [ ] Balances reconciled
+  </Step>
+
+  <Step title="Generate Reports (February)">
+    - [ ] Income report (all inflows)
+    - [ ] Expense report (all outflows)
+    - [ ] Capital gains report (if applicable)
+    - [ ] PDF summary for CPA
+  </Step>
+
+  <Step title="Organize Documentation (February)">
+    - [ ] Bank statements
+    - [ ] Invoice copies
+    - [ ] Wallet ownership proof
+    - [ ] CryptoTally exports
+  </Step>
+
+  <Step title="Meet with CPA (March)">
+    - [ ] Share reports and documentation
+    - [ ] Answer CPA questions
+    - [ ] Clarify unusual transactions
+    - [ ] Review draft return
+  </Step>
+
+  <Step title="File Taxes (April 15)">
+    - [ ] Submit tax return
+    - [ ] Archive all documents
+    - [ ] Export final CryptoTally report
+    - [ ] Set reminder for next year
+  </Step>
+</Steps>
+
+## Resources
+
+### Official Tax Guidance
+- **IRS (US):** [IRS.gov/Cryptocurrency](https://www.irs.gov/businesses/small-businesses-self-employed/virtual-currencies)
+- **HMRC (UK):** [gov.uk/cryptoassets](https://www.gov.uk/guidance/check-if-you-need-to-pay-tax-when-you-receive-cryptoassets)
+- **CRA (Canada):** [canada.ca/cryptocurrency](https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/compliance/digital-currency.html)
+
+### Tax Software
+- **TurboTax Crypto:** Crypto-specific tax filing
+- **CoinTracker:** Comprehensive crypto tax software
+- **Koinly:** Tax reports for 20+ countries
+- **TaxBit:** Enterprise crypto tax solutions
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Generate Reports"
+    icon="file-export"
+    href="/guides/generating-reports"
+  >
+    Create tax-ready CSV exports
+  </Card>
+  <Card
+    title="Join Community"
+    icon="discord"
+    href="https://discord.gg/cryptotally"
+  >
+    Ask tax questions in our Discord
+  </Card>
+</CardGroup>

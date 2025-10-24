@@ -1,0 +1,475 @@
+---
+title: "Get Transactions"
+api: "GET /api/v1/transactions"
+description: "Retrieve transactions with advanced filtering and pagination"
+---
+
+## Authentication
+
+This endpoint requires authentication via Bearer token.
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Request
+
+<ParamField query="workspace_id" type="string" required>
+  The workspace ID to fetch transactions for
+</ParamField>
+
+<ParamField query="wallet_id" type="string">
+  Filter by specific wallet ID
+</ParamField>
+
+<ParamField query="chain" type="string">
+  Filter by blockchain network (ethereum, polygon, arbitrum, bsc)
+</ParamField>
+
+<ParamField query="token" type="string">
+  Filter by token symbol (e.g., USDC, ETH, DAI)
+</ParamField>
+
+<ParamField query="direction" type="string">
+  Filter by transaction direction
+  - `inflow` - Incoming transactions
+  - `outflow` - Outgoing transactions
+</ParamField>
+
+<ParamField query="tag_ids" type="string">
+  Comma-separated tag IDs to filter by
+</ParamField>
+
+<ParamField query="start_date" type="string">
+  Start date for filtering (ISO 8601 format: YYYY-MM-DD)
+</ParamField>
+
+<ParamField query="end_date" type="string">
+  End date for filtering (ISO 8601 format: YYYY-MM-DD)
+</ParamField>
+
+<ParamField query="min_amount" type="number">
+  Minimum transaction amount (in token units)
+</ParamField>
+
+<ParamField query="max_amount" type="number">
+  Maximum transaction amount (in token units)
+</ParamField>
+
+<ParamField query="has_tags" type="boolean">
+  Filter by tagged (true) or untagged (false) transactions
+</ParamField>
+
+<ParamField query="has_notes" type="boolean">
+  Filter transactions with notes
+</ParamField>
+
+<ParamField query="sort" type="string" default="timestamp_desc">
+  Sort order
+  - `timestamp_desc` - Newest first (default)
+  - `timestamp_asc` - Oldest first
+  - `amount_desc` - Highest amount first
+  - `amount_asc` - Lowest amount first
+</ParamField>
+
+<ParamField query="page" type="number" default="1">
+  Page number for pagination
+</ParamField>
+
+<ParamField query="limit" type="number" default="50">
+  Number of transactions per page (max 200)
+</ParamField>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indicates if the request was successful
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  <Expandable title="Transaction Object">
+    <ResponseField name="id" type="string">
+      Unique transaction identifier
+    </ResponseField>
+
+    <ResponseField name="tx_hash" type="string">
+      Blockchain transaction hash
+    </ResponseField>
+
+    <ResponseField name="wallet_id" type="string">
+      Associated wallet ID
+    </ResponseField>
+
+    <ResponseField name="wallet_label" type="string">
+      Wallet label for convenience
+    </ResponseField>
+
+    <ResponseField name="chain" type="string">
+      Blockchain network
+    </ResponseField>
+
+    <ResponseField name="from_address" type="string">
+      Sender address
+    </ResponseField>
+
+    <ResponseField name="to_address" type="string">
+      Recipient address
+    </ResponseField>
+
+    <ResponseField name="token" type="object">
+      <Expandable title="Token Details">
+        <ResponseField name="symbol" type="string">
+          Token symbol (ETH, USDC, etc.)
+        </ResponseField>
+
+        <ResponseField name="address" type="string">
+          Token contract address (null for native tokens)
+        </ResponseField>
+
+        <ResponseField name="decimals" type="number">
+          Token decimals
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="amount" type="string">
+      Transaction amount in token units
+    </ResponseField>
+
+    <ResponseField name="fiat_value" type="number">
+      USD value at time of transaction
+    </ResponseField>
+
+    <ResponseField name="direction" type="string">
+      inflow or outflow
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      Transaction type (transfer, swap, bridge, etc.)
+    </ResponseField>
+
+    <ResponseField name="timestamp" type="string">
+      Transaction timestamp (ISO 8601)
+    </ResponseField>
+
+    <ResponseField name="tags" type="array">
+      Array of tag objects
+    </ResponseField>
+
+    <ResponseField name="notes" type="string">
+      User-added notes
+    </ResponseField>
+
+    <ResponseField name="attachments" type="array">
+      Array of attachment objects
+    </ResponseField>
+
+    <ResponseField name="explorer_url" type="string">
+      Link to blockchain explorer
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="pagination" type="object">
+  <Expandable title="Pagination Info">
+    <ResponseField name="total" type="number">
+      Total number of transactions matching filters
+    </ResponseField>
+
+    <ResponseField name="page" type="number">
+      Current page number
+    </ResponseField>
+
+    <ResponseField name="pages" type="number">
+      Total number of pages
+    </ResponseField>
+
+    <ResponseField name="limit" type="number">
+      Results per page
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="summary" type="object">
+  <Expandable title="Summary Statistics">
+    <ResponseField name="total_inflow" type="number">
+      Total USD value of inflows
+    </ResponseField>
+
+    <ResponseField name="total_outflow" type="number">
+      Total USD value of outflows
+    </ResponseField>
+
+    <ResponseField name="net_flow" type="number">
+      Net change (inflow - outflow)
+    </ResponseField>
+
+    <ResponseField name="transaction_count" type="number">
+      Total transactions in result set
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET "https://api.cryptotally.xyz/v1/transactions?workspace_id=ws_123&direction=inflow&start_date=2024-01-01&end_date=2024-03-31" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const response = await fetch(
+  'https://api.cryptotally.xyz/v1/transactions?' + new URLSearchParams({
+    workspace_id: 'ws_123',
+    direction: 'inflow',
+    start_date: '2024-01-01',
+    end_date: '2024-03-31',
+    page: '1',
+    limit: '50'
+  }), {
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY'
+    }
+  }
+);
+
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY'
+}
+
+params = {
+    'workspace_id': 'ws_123',
+    'direction': 'inflow',
+    'start_date': '2024-01-01',
+    'end_date': '2024-03-31',
+    'token': 'USDC',
+    'page': 1,
+    'limit': 50
+}
+
+response = requests.get(
+    'https://api.cryptotally.xyz/v1/transactions',
+    headers=headers,
+    params=params
+)
+
+data = response.json()
+print(data)
+```
+
+```typescript TypeScript
+interface Transaction {
+  id: string;
+  tx_hash: string;
+  wallet_id: string;
+  chain: string;
+  token: {
+    symbol: string;
+    address: string | null;
+    decimals: number;
+  };
+  amount: string;
+  fiat_value: number;
+  direction: 'inflow' | 'outflow';
+  timestamp: string;
+  tags: Tag[];
+  notes: string | null;
+}
+
+const getTransactions = async (
+  workspaceId: string,
+  filters: TransactionFilters
+): Promise<Transaction[]> => {
+  const params = new URLSearchParams({
+    workspace_id: workspaceId,
+    ...filters
+  });
+
+  const response = await fetch(
+    `https://api.cryptotally.xyz/v1/transactions?${params}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${process.env.CRYPTOTALLY_API_KEY}`
+      }
+    }
+  );
+
+  const { data } = await response.json();
+  return data;
+};
+```
+
+</CodeGroup>
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "txn_abc123",
+      "tx_hash": "0x1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890",
+      "wallet_id": "wlt_abc123",
+      "wallet_label": "Treasury",
+      "chain": "ethereum",
+      "from_address": "0x1234567890abcdef1234567890abcdef12345678",
+      "to_address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+      "token": {
+        "symbol": "USDC",
+        "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "decimals": 6
+      },
+      "amount": "5000.00",
+      "fiat_value": 5000.00,
+      "direction": "inflow",
+      "type": "transfer",
+      "timestamp": "2024-03-15T14:32:00Z",
+      "tags": [
+        {
+          "id": "tag_xyz789",
+          "name": "Customer Payment",
+          "color": "#10B981"
+        }
+      ],
+      "notes": "Payment from Client ABC for Q1 2024 services - Invoice #12345",
+      "attachments": [
+        {
+          "id": "att_def456",
+          "file_name": "invoice-12345.pdf",
+          "file_url": "https://storage.cryptotally.xyz/attachments/invoice-12345.pdf",
+          "file_size": 245678,
+          "uploaded_at": "2024-03-15T15:00:00Z"
+        }
+      ],
+      "explorer_url": "https://etherscan.io/tx/0x1a2b3c4d5e6f7890abcdef1234567890abcdef1234567890abcdef1234567890"
+    }
+  ],
+  "pagination": {
+    "total": 147,
+    "page": 1,
+    "pages": 3,
+    "limit": 50
+  },
+  "summary": {
+    "total_inflow": 125000.00,
+    "total_outflow": 0,
+    "net_flow": 125000.00,
+    "transaction_count": 147
+  }
+}
+```
+
+## Filtering Examples
+
+### Get all customer payments in Q1 2024
+```bash
+GET /api/v1/transactions?workspace_id=ws_123&tag_ids=tag_payment&start_date=2024-01-01&end_date=2024-03-31&direction=inflow
+```
+
+### Find large USDC transactions
+```bash
+GET /api/v1/transactions?workspace_id=ws_123&token=USDC&min_amount=10000&sort=amount_desc
+```
+
+### Get untagged transactions
+```bash
+GET /api/v1/transactions?workspace_id=ws_123&has_tags=false
+```
+
+### Get all expenses from Operations wallet
+```bash
+GET /api/v1/transactions?workspace_id=ws_123&wallet_id=wlt_ops123&direction=outflow
+```
+
+## Error Responses
+
+<ResponseExample>
+
+```json 400 Bad Request
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_PARAMETERS",
+    "message": "Invalid date format for start_date. Use YYYY-MM-DD.",
+    "field": "start_date"
+  }
+}
+```
+
+```json 401 Unauthorized
+{
+  "success": false,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Invalid or missing API key"
+  }
+}
+```
+
+```json 404 Not Found
+{
+  "success": false,
+  "error": {
+    "code": "WALLET_NOT_FOUND",
+    "message": "Wallet with ID 'wlt_123' not found"
+  }
+}
+```
+
+</ResponseExample>
+
+## Rate Limits
+
+- **Free Tier**: 100 requests per hour
+- **Pro Tier**: 1,000 requests per hour
+- **Enterprise Tier**: Custom limits
+
+## Performance Tips
+
+<Tip>
+  For large datasets, use date range filters and pagination instead of fetching all transactions at once.
+</Tip>
+
+<Tip>
+  The `summary` object provides aggregated statistics without needing to process all transactions client-side.
+</Tip>
+
+<Tip>
+  Use `wallet_id` filter when possible - it's more efficient than filtering by `chain` or other parameters.
+</Tip>
+
+## Webhook Support
+
+Subscribe to transaction events:
+- `transaction.created` - New transaction synced
+- `transaction.tagged` - Transaction tagged
+- `transaction.updated` - Notes or attachments added
+
+See [Webhooks](/api-reference/webhooks) for setup instructions.
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Get Wallets" icon="wallet" href="/api-reference/endpoint/get-wallets">
+    Fetch wallet list
+  </Card>
+  <Card title="Create Tag" icon="tag" href="/api-reference/endpoint/create-tag">
+    Create transaction tags
+  </Card>
+  <Card title="Export Data" icon="download" href="/api-reference/endpoint/export-data">
+    Generate CSV exports
+  </Card>
+  <Card title="Update Transaction" icon="pen" href="/api-reference/endpoint/update-transaction">
+    Add tags and notes
+  </Card>
+</CardGroup>

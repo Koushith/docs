@@ -1,0 +1,391 @@
+---
+title: 'Generating Reports'
+description: 'Export and share transaction data for accounting, taxes, and audits'
+---
+
+## Overview
+
+CryptoTally's reporting features allow you to export filtered transaction data in formats perfect for accountants, tax software, and audit requirements. Generate custom reports based on wallets, tags, date ranges, and tokens.
+
+## Export Formats
+
+<CardGroup cols={2}>
+  <Card title="CSV Export" icon="file-csv">
+    Spreadsheet-compatible format for Excel, Google Sheets, and accounting software
+  </Card>
+  <Card title="PDF Report" icon="file-pdf">
+    Professional reports with charts and summaries for presentations
+  </Card>
+</CardGroup>
+
+<Info>
+  **Coming Soon**: QuickBooks, Xero, and TurboTax direct integrations
+</Info>
+
+## Generating a CSV Export
+
+<Steps>
+  <Step title="Navigate to Transactions">
+    Go to the **Transactions** page
+  </Step>
+
+  <Step title="Apply Filters">
+    Use filters to narrow down the data you want to export:
+    - **Date Range**: Select specific tax year or quarter
+    - **Wallets**: Choose specific wallets
+    - **Tags**: Filter by transaction category
+    - **Tokens**: Export specific token transactions
+    - **Direction**: Income only, expenses only, or both
+  </Step>
+
+  <Step title="Click Export">
+    Click the **Export** button in the top right
+  </Step>
+
+  <Step title="Choose Format">
+    Select **CSV** and configure options:
+    - Include/exclude columns
+    - Date format preference
+    - Currency display (USD, EUR, etc.)
+  </Step>
+
+  <Step title="Download">
+    Click **Generate Export** and save the CSV file
+  </Step>
+</Steps>
+
+## CSV Export Columns
+
+The exported CSV includes the following columns:
+
+| Column | Description | Example |
+|--------|-------------|---------|
+| Date | Transaction timestamp | 2024-03-15 14:32:00 UTC |
+| Transaction Hash | Blockchain transaction ID | 0xabc123... |
+| From Address | Sender address | 0x1234...5678 |
+| To Address | Recipient address | 0x9876...5432 |
+| Wallet Label | Your wallet label | Treasury |
+| Chain | Blockchain network | Ethereum |
+| Token | Token symbol | USDC |
+| Amount | Transaction amount | 5000.00 |
+| Fiat Value | USD value at transaction time | $5,000.00 |
+| Direction | Inflow or Outflow | Inflow |
+| Type | Transaction type | Transfer |
+| Tags | Applied tags | Customer Payment, Q1 2024 |
+| Notes | Your notes | Payment from Client X |
+| Attachments | Number of attached files | 2 |
+
+<Tip>
+  You can customize which columns to include in **Settings** → **Export Preferences**
+</Tip>
+
+## Generating PDF Reports
+
+PDF reports are perfect for:
+- Grant auditors
+- Board presentations
+- Internal financial reviews
+- Quarterly reports
+
+<Steps>
+  <Step title="Apply Filters">
+    Filter transactions for your desired report scope
+  </Step>
+
+  <Step title="Click Export">
+    Select **Export** → **PDF Report**
+  </Step>
+
+  <Step title="Choose Report Type">
+    Select from pre-built templates:
+    - **Summary Report**: High-level overview with charts
+    - **Detailed Report**: Transaction-by-transaction listing
+    - **Tax Report**: Organized by income/expense categories
+    - **Audit Report**: Comprehensive with attachments
+  </Step>
+
+  <Step title="Customize">
+    Configure report options:
+    - Report title
+    - Date range
+    - Logo (for organization workspaces)
+    - Include charts and graphs
+  </Step>
+
+  <Step title="Generate">
+    Click **Generate PDF** and download
+  </Step>
+</Steps>
+
+### PDF Report Contents
+
+<AccordionGroup>
+  <Accordion title="Summary Report">
+    - Total inflows and outflows
+    - Net change in portfolio value
+    - Top tokens by volume
+    - Transaction count by category
+    - Monthly trend charts
+  </Accordion>
+
+  <Accordion title="Detailed Report">
+    - Complete transaction listing
+    - Individual fiat values
+    - Tags and notes
+    - Wallet-level breakdown
+    - Token balances
+  </Accordion>
+
+  <Accordion title="Tax Report">
+    - Income transactions with fiat values
+    - Expense transactions with fiat values
+    - Category-wise summaries
+    - Cost basis information
+    - Capital gains/losses (if applicable)
+  </Accordion>
+
+  <Accordion title="Audit Report">
+    - All transaction details
+    - Attached documents included
+    - Wallet address verification
+    - Blockchain explorer links
+    - Compliance notes
+  </Accordion>
+</AccordionGroup>
+
+## Report Templates
+
+### Quarterly Business Report
+Perfect for startups and organizations:
+
+**Filters:**
+- Date Range: Q1 2024 (Jan 1 - Mar 31)
+- All wallets
+- All tags
+
+**Format:** PDF Summary Report
+
+**Contents:**
+- Revenue breakdown by customer/project
+- Expense analysis by category
+- Token holdings snapshot
+- Cash flow trends
+
+### Annual Tax Report
+For personal tax filing:
+
+**Filters:**
+- Date Range: Full tax year (Jan 1 - Dec 31, 2024)
+- All wallets
+- Direction: Inflows (Income)
+
+**Format:** CSV Export
+
+**Contents:**
+- All income transactions
+- Fiat values at time of receipt
+- Customer/source information
+- Supporting documentation
+
+### Grant Report
+For funded projects:
+
+**Filters:**
+- Specific wallet: Grant Treasury
+- Date Range: Grant period
+- Tags: Grant-related expenses
+
+**Format:** PDF Audit Report
+
+**Contents:**
+- All grant-funded expenses
+- Category breakdown
+- Attached invoices and receipts
+- Remaining funds
+
+### Monthly Expense Report
+For ongoing tracking:
+
+**Filters:**
+- Date Range: Current month
+- Direction: Outflows (Expenses)
+- All tags
+
+**Format:** CSV Export
+
+**Contents:**
+- Monthly spending by category
+- Vendor breakdown
+- Comparison to previous month
+
+## Scheduled Reports
+
+<Info>
+  **Pro Feature**: Automatically generate and email reports on a schedule
+</Info>
+
+Set up automated reports:
+
+1. Go to **Settings** → **Scheduled Reports**
+2. Click **+ New Schedule**
+3. Configure:
+   - Report name
+   - Frequency (daily, weekly, monthly, quarterly)
+   - Filters and format
+   - Recipients (email addresses)
+4. Save schedule
+
+Example schedules:
+- **Weekly**: Team spending summary every Monday
+- **Monthly**: Full transaction export on the 1st
+- **Quarterly**: Executive summary for board meetings
+
+## Sharing Reports
+
+### With Your Team
+In organization workspaces:
+- **Admin/Contributor**: Can generate and download reports
+- **Viewer**: Can view reports but not download
+
+### With External Parties
+For sharing with accountants or auditors:
+
+1. Generate the report
+2. Download the file
+3. Share securely via:
+   - Encrypted email
+   - Secure file sharing (Dropbox, Google Drive)
+   - Your accounting firm's client portal
+
+<Warning>
+  Reports contain sensitive financial information. Always use secure sharing methods.
+</Warning>
+
+## Report Customization
+
+### Column Selection
+Choose which data to include:
+- **Essential**: Date, Amount, Token, Direction
+- **Accounting**: Tags, Notes, Fiat Value
+- **Technical**: Transaction Hash, From/To Addresses, Chain
+- **Documentation**: Attachment count
+
+### Date Formats
+- US Format: MM/DD/YYYY
+- ISO Format: YYYY-MM-DD
+- EU Format: DD/MM/YYYY
+
+### Currency Display
+- USD ($)
+- EUR (€)
+- GBP (£)
+- INR (₹)
+- And more...
+
+## Advanced Filters for Reports
+
+Combine multiple filters for precise reports:
+
+### Example 1: Customer Revenue Report
+```
+Date Range: Q4 2024
+Tags: Customer Payment, Invoiced
+Token: USDC
+Direction: Inflow
+```
+
+### Example 2: Marketing Spend Analysis
+```
+Date Range: Last 6 months
+Tags: Marketing, Advertising, Social Media
+Direction: Outflow
+Wallets: Operations
+```
+
+### Example 3: Salary Expenses
+```
+Date Range: Full year 2024
+Tags: Salary, Contractor
+Direction: Outflow
+```
+
+## Integration with Accounting Software
+
+### Manual Import
+1. Generate CSV export
+2. Open your accounting software (QuickBooks, Xero, etc.)
+3. Import CSV as journal entries or transactions
+4. Map CryptoTally columns to accounting categories
+
+### API Access (Coming Soon)
+For automated sync:
+```bash
+curl -X GET "https://api.cryptotally.xyz/v1/reports/export" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d "format=csv&start_date=2024-01-01&end_date=2024-12-31"
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Export is taking too long">
+    - Large date ranges (1+ years) may take 30-60 seconds
+    - Try breaking into smaller quarterly reports
+    - Reduce the number of wallets/filters selected
+  </Accordion>
+
+  <Accordion title="CSV won't open in Excel">
+    - Ensure you're using a recent version of Excel
+    - Try opening with Google Sheets first
+    - Check file isn't corrupted (try re-downloading)
+  </Accordion>
+
+  <Accordion title="Missing transactions in report">
+    - Verify your filters aren't too restrictive
+    - Check that transactions have synced (refresh wallets)
+    - Ensure date range includes transaction date
+  </Accordion>
+
+  <Accordion title="Fiat values seem incorrect">
+    - CryptoTally uses historical prices at transaction time
+    - Price data comes from CoinGecko API
+    - For very old transactions, data may be estimated
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<Card title="Regular Exports" icon="calendar-check">
+  Export your data monthly instead of waiting for tax season. This makes it easier to catch errors early.
+</Card>
+
+<Card title="Consistent Tagging" icon="tags">
+  Tag transactions before exporting. Untagged transactions make reports less useful for tax categorization.
+</Card>
+
+<Card title="Backup Your Data" icon="cloud-arrow-down">
+  Download annual exports and store securely. This protects against data loss.
+</Card>
+
+<Card title="Document Assumptions" icon="note">
+  Add notes explaining unusual transactions before generating reports for accountants.
+</Card>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Tax Preparation"
+    icon="calculator"
+    href="/guides/tax-preparation"
+  >
+    Use reports for tax filing
+  </Card>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference"
+  >
+    Automate report generation via API
+  </Card>
+</CardGroup>

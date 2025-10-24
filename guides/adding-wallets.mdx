@@ -1,0 +1,175 @@
+---
+title: 'Adding Wallets'
+description: 'Learn how to connect and manage multiple crypto wallets in CryptoTally'
+---
+
+## Overview
+
+CryptoTally uses **read-only wallet tracking**, meaning you only need to provide wallet addresses - no private keys or transaction signing required. This makes it safe and easy to track any wallet, including multi-sigs and organizational treasuries.
+
+## Supported Chains
+
+CryptoTally currently supports the following blockchain networks:
+
+<CardGroup cols={2}>
+  <Card title="Ethereum" icon="ethereum">
+    Mainnet transactions and ERC-20 tokens
+  </Card>
+  <Card title="Polygon" icon="hexagon">
+    Fast, low-cost transactions
+  </Card>
+  <Card title="Arbitrum" icon="layer-group">
+    Layer 2 scaling solution
+  </Card>
+  <Card title="BNB Chain" icon="coins">
+    BNB and BEP-20 tokens
+  </Card>
+</CardGroup>
+
+## Adding Your First Wallet
+
+<Steps>
+  <Step title="Navigate to Wallets">
+    Click on **Wallets** in the sidebar navigation
+  </Step>
+
+  <Step title="Click Add Wallet">
+    Press the **+ Add Wallet** button in the top right
+  </Step>
+
+  <Step title="Enter Wallet Details">
+    - **Address**: Paste your wallet address (0x...)
+    - **Label**: Give it a name (e.g., "Treasury", "Personal", "Operations")
+    - **Chain**: Select the blockchain network
+  </Step>
+
+  <Step title="Save and Sync">
+    Click **Add Wallet** and CryptoTally will automatically fetch your transaction history
+  </Step>
+</Steps>
+
+## Wallet Labels
+
+Labels help you organize multiple wallets. Common label examples:
+
+- **Treasury** - Main organizational funds
+- **Payroll** - Employee payment wallet
+- **Operations** - Day-to-day expenses
+- **Personal** - Individual wallet
+- **Client A** - Project-specific wallet
+
+## Managing Multiple Wallets
+
+### Adding Multiple Chains
+
+You can add the same wallet address across different chains. For example:
+
+```
+0x1234...5678 - Ethereum (Label: Treasury)
+0x1234...5678 - Polygon (Label: Treasury - Polygon)
+0x1234...5678 - Arbitrum (Label: Treasury - Arbitrum)
+```
+
+### Editing Wallet Details
+
+To update a wallet's label:
+1. Go to **Wallets** page
+2. Click the ⋮ menu next to the wallet
+3. Select **Edit**
+4. Update the label and save
+
+### Removing Wallets
+
+<Warning>
+  Removing a wallet will not delete transaction history or tags. Your tagged data remains accessible in the Transactions view.
+</Warning>
+
+To remove a wallet:
+1. Go to **Wallets** page
+2. Click the ⋮ menu next to the wallet
+3. Select **Remove**
+4. Confirm the action
+
+## Wallet Privacy & Security
+
+<AccordionGroup>
+  <Accordion title="Is my wallet safe?">
+    Yes! CryptoTally only requires your **public wallet address** - we never ask for private keys or seed phrases. This is read-only access.
+  </Accordion>
+
+  <Accordion title="Can CryptoTally move my funds?">
+    No. Without your private keys, it's impossible for anyone (including CryptoTally) to move funds or sign transactions.
+  </Accordion>
+
+  <Accordion title="What data does CryptoTally see?">
+    We fetch publicly available blockchain data: transactions, token transfers, and balances. This data is already public on the blockchain.
+  </Accordion>
+
+  <Accordion title="Can I track someone else's wallet?">
+    Yes! Since blockchain data is public, you can track any wallet address - useful for monitoring organizational treasuries or multi-sig wallets.
+  </Accordion>
+</AccordionGroup>
+
+## Automatic Transaction Sync
+
+Once you add a wallet, CryptoTally automatically:
+
+- ✅ Fetches historical transactions
+- ✅ Tracks token transfers (ERC-20, BEP-20, etc.)
+- ✅ Records native token transfers (ETH, MATIC, BNB)
+- ✅ Captures fiat values at time of transaction
+- ✅ Updates balances in real-time
+
+<Info>
+  Initial sync may take 1-2 minutes for wallets with extensive transaction history (100+ transactions).
+</Info>
+
+## Workspace Context
+
+If you're using an **organization workspace**, all team members with access can view and manage wallets based on their role:
+
+| Role | View Wallets | Add Wallets | Edit Labels | Remove Wallets |
+|------|--------------|-------------|-------------|----------------|
+| Admin | ✅ | ✅ | ✅ | ✅ |
+| Contributor | ✅ | ✅ | ✅ | ❌ |
+| Viewer | ✅ | ❌ | ❌ | ❌ |
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My transactions aren't showing up">
+    - Ensure you selected the correct chain
+    - Wait 1-2 minutes for initial sync
+    - Check that the wallet address is correct
+    - Some chains may have delayed indexing
+  </Accordion>
+
+  <Accordion title="Balance doesn't match my wallet">
+    - CryptoTally shows balances for tracked tokens only
+    - NFTs are not currently included in balance calculations
+    - Refresh the page to fetch latest data
+  </Accordion>
+
+  <Accordion title="Can I import wallets in bulk?">
+    Currently, wallets must be added one at a time. Bulk import is on our roadmap.
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Tag Transactions"
+    icon="tags"
+    href="/guides/tagging-transactions"
+  >
+    Organize your transactions with custom tags
+  </Card>
+  <Card
+    title="Generate Reports"
+    icon="file-export"
+    href="/guides/generating-reports"
+  >
+    Export data for accounting and taxes
+  </Card>
+</CardGroup>
