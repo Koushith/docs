@@ -1,0 +1,40 @@
+<svg width="1200" height="400" viewBox="0 0 1200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Light gradient background -->
+  <rect width="1200" height="400" fill="url(#light-gradient)"/>
+
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5E7EB" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="light-gradient" x1="0" y1="0" x2="1200" y2="400">
+      <stop offset="0%" stop-color="#F9FAFB"/>
+      <stop offset="100%" stop-color="#F3F4F6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="400" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Logo -->
+  <rect x="80" y="120" width="80" height="80" rx="16" fill="#111827"/>
+  <text x="120" y="175" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="42" font-weight="700" fill="#FFFFFF" text-anchor="middle">CT</text>
+
+  <!-- CryptoTally text -->
+  <text x="180" y="175" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="48" font-weight="700" fill="#111827">CryptoTally</text>
+
+  <!-- Tagline -->
+  <text x="80" y="240" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="24" font-weight="400" fill="#6B7280">Crypto Accounting Made Simple</text>
+
+  <!-- Feature cards -->
+  <rect x="80" y="280" width="280" height="80" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <text x="100" y="315" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="600" fill="#111827">Multi-Chain Support</text>
+  <text x="100" y="340" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="14" font-weight="400" fill="#6B7280">Track across Ethereum, Polygon & more</text>
+
+  <rect x="380" y="280" width="280" height="80" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <text x="400" y="315" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="600" fill="#111827">Auto-Sync Transactions</text>
+  <text x="400" y="340" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="14" font-weight="400" fill="#6B7280">Automatic blockchain data fetching</text>
+
+  <rect x="680" y="280" width="280" height="80" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <text x="700" y="315" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="600" fill="#111827">Tax-Ready Reports</text>
+  <text x="700" y="340" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="14" font-weight="400" fill="#6B7280">CSV exports for your accountant</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg width="1400" height="600" viewBox="0 0 1400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1400" height="600" fill="#F9FAFB"/>
+
+  <!-- Main title -->
+  <text x="700" y="100" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="56" font-weight="700" fill="#111827" text-anchor="middle">
+    Built for Teams Running on Crypto
+  </text>
+
+  <!-- Card 1: Startups -->
+  <rect x="40" y="180" width="310" height="360" rx="24" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <circle cx="195" cy="290" r="60" fill="#F3F4F6"/>
+  <text x="195" y="300" font-family="system-ui" font-size="40" text-anchor="middle">💰</text>
+  <text x="195" y="390" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="22" font-weight="700" fill="#111827" text-anchor="middle">
+    Startups accepting crypto
+  </text>
+  <text x="195" y="430" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    Track USDC, ETH, or token
+  </text>
+  <text x="195" y="455" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    payments seamlessly
+  </text>
+
+  <!-- Card 2: Agencies & Freelancers -->
+  <rect x="370" y="180" width="310" height="360" rx="24" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <circle cx="525" cy="290" r="60" fill="#F3F4F6"/>
+  <text x="525" y="300" font-family="system-ui" font-size="40" text-anchor="middle">👥</text>
+  <text x="525" y="390" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="22" font-weight="700" fill="#111827" text-anchor="middle">
+    Agencies &amp; freelancers
+  </text>
+  <text x="525" y="430" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    Manage crypto income and
+  </text>
+  <text x="525" y="455" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    expenses effortlessly
+  </text>
+
+  <!-- Card 3: DAOs -->
+  <rect x="700" y="180" width="310" height="360" rx="24" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <circle cx="855" cy="290" r="60" fill="#F3F4F6"/>
+  <text x="855" y="300" font-family="system-ui" font-size="40" text-anchor="middle">🏛️</text>
+  <text x="855" y="390" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="22" font-weight="700" fill="#111827" text-anchor="middle">
+    DAOs &amp; grant recipients
+  </text>
+  <text x="855" y="430" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    Monitor multisig wallet
+  </text>
+  <text x="855" y="455" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    activities in real-time
+  </text>
+
+  <!-- Card 4: NFT Creators -->
+  <rect x="1030" y="180" width="310" height="360" rx="24" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <circle cx="1185" cy="290" r="60" fill="#F3F4F6"/>
+  <text x="1185" y="300" font-family="system-ui" font-size="40" text-anchor="middle">🎨</text>
+  <text x="1185" y="390" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="22" font-weight="700" fill="#111827" text-anchor="middle">
+    NFT creators
+  </text>
+  <text x="1185" y="430" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    Track on-chain revenue and
+  </text>
+  <text x="1185" y="455" font-family="system-ui, -apple-system, Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280" text-anchor="middle">
+    royalties automatically
+  </text>
+</svg>
